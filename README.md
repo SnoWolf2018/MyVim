@@ -8,3 +8,5 @@
 </code></pre>
 
 -  Download YouCompleteMe .   
+
+-  Change 'vimrc' to '.vimrc' && mv .vimrc ../
