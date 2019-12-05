@@ -1,7 +1,7 @@
 # MyVim
 -  Build .vim folder in your home dir .  
 
--  Change dir && git clone  
+-  Change dir to .vim && git clone  
 
 <pre><code>
     cd .vim     
