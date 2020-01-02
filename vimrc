@@ -236,4 +236,5 @@ func SkipPair()
 endfunc
 "将Control-L键帮定为跳出括号
 inoremap <c-l> <c-r>=SkipPair()<CR>
-
+"将TAB键帮定为跳出括号
+"inoremap <TAB> <c-r>=SkipPair()<CR>
