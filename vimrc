@@ -212,11 +212,10 @@ map <F6> :call RunResult()<CR>
 "===========================自动补全括号============================ 
 :inoremap ( ()<ESC>i
 :inoremap ) <c-r>=ClosePair(')')<CR>
-"by
-"Suzzz:原作者这种设置，输入{会自动补全，并且中间插入一个空行，将光标定位到空行。这对于函数是ok的，但是使用花括号初始化数组、vector时就不方便了。所以改为现在这种：只是补全，然后光标在左右括号中间。
-":inoremap { {<CR>}<ESC>0
-:inoremap { {}<ESC>i
-:inoremap } <c-r>=ClosePair('}')<CR>
+:inoremap { {<CR>}<ESC>O
+"by Suzzz:原作者这种设置，输入{会自动补全，并且中间插入一个空行，将光标定位到空行。这对于函数是ok的，但是使用花括号初始化数组、vector时就不方便了。所以改为现在这种：只是补全，然后光标在左右括号中间。
+":inoremap { {}<ESC>i
+":inoremap } <c-r>=ClosePair('}')<CR>
 :inoremap [ []<ESC>i
 :inoremap ] <c-r>=ClosePair(']')<CR>
 :inoremap " ""<ESC>i
@@ -228,5 +227,13 @@ function! ClosePair(char)
 		return a:char
 	endif
 endfunction
-
+func SkipPair()
+	if getline('.')[col('.')-1]==')'||getline('.')[col('.')-1]==']'||getline('.')[col('.')-1]=='}'||getline('.')[col('.')-1]=='''||getline('.')[col('.')-1]=='"'
+		return "\<ESC>la"
+	else
+		return "\t"
+	endif
+endfunc
+"将Control-L键帮定为跳出括号
+inoremap <c-l> <c-r>=SkipPair()<CR>
 
