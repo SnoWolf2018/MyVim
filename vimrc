@@ -228,13 +228,16 @@ function! ClosePair(char)
 	endif
 endfunction
 func SkipPair()
-	if getline('.')[col('.')-1]==')'||getline('.')[col('.')-1]==']'||getline('.')[col('.')-1]=='}'||getline('.')[col('.')-1]=='''||getline('.')[col('.')-1]=='"'
+	if getline('.')[col('.')-1]==')'||getline('.')[col('.')-1]==']'||getline('.')[col('.')-1]=='}'||getline('.')[col('.')-1]=="'"||getline('.')[col('.')-1]=='"'
 		return "\<ESC>la"
 	else
 		return "\t"
 	endif
 endfunc
 "将Control-L键帮定为跳出括号
-inoremap <c-l> <c-r>=SkipPair()<CR>
+inoremap <C-L> <c-r>=SkipPair()<CR>
+"将Alt-L键帮定为跳出括号
+"inoremap <M-L> <c-r>=SkipPair()<CR>
+"inoremap <A-L> <c-r>=SkipPair()<CR>
 "将TAB键帮定为跳出括号
 "inoremap <TAB> <c-r>=SkipPair()<CR>
