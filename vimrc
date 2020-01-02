@@ -208,3 +208,25 @@ imap <F5> <ESC>:call CompileCode()<CR>
 vmap <F5> <ESC>:call CompileCode()<CR>
 
 map <F6> :call RunResult()<CR>
+
+"===========================自动补全括号============================ 
+:inoremap ( ()<ESC>i
+:inoremap ) <c-r>=ClosePair(')')<CR>
+"by
+"Suzzz:原作者这种设置，输入{会自动补全，并且中间插入一个空行，将光标定位到空行。这对于函数是ok的，但是使用花括号初始化数组、vector时就不方便了。所以改为现在这种：只是补全，然后光标在左右括号中间。
+":inoremap { {<CR>}<ESC>0
+:inoremap { {}<ESC>i
+:inoremap } <c-r>=ClosePair('}')<CR>
+:inoremap [ []<ESC>i
+:inoremap ] <c-r>=ClosePair(']')<CR>
+:inoremap " ""<ESC>i
+:inoremap ' ''<ESC>i
+function! ClosePair(char)
+	if getline('.')[col('.')-1] == a:char
+		return "\<Right>"
+	else
+		return a:char
+	endif
+endfunction
+
+
